@@ -1,5 +1,4 @@
 import { Server } from "http";
-
 import app from "./app";
 import config from "./config";
 
@@ -46,4 +45,3 @@ async function bootstrap() {
 }
 
 bootstrap();
-console.log("Database URL Check:", process.env.DATABASE_URL);
