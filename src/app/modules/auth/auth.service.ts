@@ -4,7 +4,7 @@ import { prisma } from "../../../../lib/prisma";
 import config from "../../../config";
 import { jwtHelper } from "../../../helper/jwtHelper";
 
-export const login = async (payload: { email: string; password: string }) => {
+const login = async (payload: { email: string; password: string }) => {
   const user = await prisma.user.findUniqueOrThrow({
     where: {
       email: payload.email,
