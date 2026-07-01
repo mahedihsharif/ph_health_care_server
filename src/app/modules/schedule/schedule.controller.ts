@@ -5,11 +5,12 @@ import { ScheduleService } from "./schedule.service";
 
 const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
   const result = await ScheduleService.insertIntoDB(req.body);
+
   sendResponse(res, {
     statusCode: 201,
     success: true,
-    message: "Doctor Schedule create successfully!",
-    data: "",
+    message: "Schedule create successfully!",
+    data: result,
   });
 });
 
