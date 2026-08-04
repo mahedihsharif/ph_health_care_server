@@ -1,8 +1,10 @@
 import bcrypt from "bcrypt";
+import httpStatus from "http-status";
 import { UserStatus } from "../../../../generated/prisma/enums";
 import { prisma } from "../../../../lib/prisma";
 import config from "../../../config";
 import { jwtHelper } from "../../../helper/jwtHelper";
+import AppError from "../../errors/AppError";
 
 const login = async (payload: { email: string; password: string }) => {
   const user = await prisma.user.findUniqueOrThrow({
@@ -16,7 +18,7 @@ const login = async (payload: { email: string; password: string }) => {
     user.password,
   );
   if (!isCorrectPassword) {
-    throw new Error("Password doesn't matched!");
+    throw new AppError(httpStatus.BAD_REQUEST, "Password doesn't matched!");
   }
 
   const accessToken = jwtHelper.generateToken(
